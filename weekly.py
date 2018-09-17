@@ -43,7 +43,7 @@ config = {
     "pdf_name": "pdfs_new/Weekly.pdf",
     "sections": [
         {
-            "name": "summary last week",
+            "name": "summary LW",
             "filter_lines": "number-comma",
             "trim": [3, -3],
             "remove": [',', '%', 'Spent', 'Weekly'],
@@ -81,36 +81,38 @@ config = {
                 "end": "PageViews compare"
             }
         },
-        # {
-        #     "name": "Referring domains yesterday",
-        #     "filter_lines": "percent",
-        #     "remove": [',', '%'],
-        #     "targets": [],
-        #     "subs": [],
-        #     "keys": [
-        #         ('domain', 1),
-        #         ('pv', 2)
-        #     ],
-        #     "markers": {
-        #         "start": "Ref Domains yesterday",
-        #         "end": "Ref Domains L90"
-        #     },
-        # },
-        # {
-        #     "name": "Referring domains L90",
-        #     "filter_lines": "percent",
-        #     "remove": [',', '%'],
-        #     "targets": [],
-        #     "subs": [],
-        #     "keys": [
-        #         ('domain', 1),
-        #         ('pv_l90', 2)
-        #     ],
-        #     "markers": {
-        #         "start": "Ref Domains L90",
-        #         "end": "Top Asset ID yesterday"
-        #     },
-        # },
+        {
+            "name": "Referring domains LW",
+            "filter_lines": "percent",
+            "trim": [3, -4],
+            "remove": [',', '%'],
+            "targets": [],
+            "subs": [],
+            "keys": [
+                ('domain', 1),
+                ('pv', 2)
+            ],
+            "markers": {
+                "start": "Ref Domains LW",
+                "end": "Ref Domains L90"
+            },
+        },
+        {
+            "name": "Referring domains L90",
+            "filter_lines": "percent",
+            "trim": [3, -4],
+            "remove": [',', '%'],
+            "targets": [],
+            "subs": [],
+            "keys": [
+                ('domain', 1),
+                ('pv_l90', 2)
+            ],
+            "markers": {
+                "start": "Ref Domains L90",
+                "end": "Tco top stories lw"
+            },
+        },
         # {
         #     "name": "Spec top stories",
         #     "filter_lines": "percent",
@@ -175,73 +177,77 @@ config = {
         #         "end": "FB top stories ys"
         #     },
         # },
-        # {
-        #     "name": "Facebook top stories",
-        #     "filter_lines": "percent",
-        #     "remove": [',', '%'],
-        #     "targets": [],
-        #     "subs": [],
-        #     "keys": [
-        #         ('rank', 0),
-        #         ('asset', 1),
-        #         ('pv', 2),
-        #         ('%', 3)
-        #     ],
-        #     "markers": {
-        #         "start": "FB top stories ys",
-        #         "end": "Tco top stories ys"
-        #     },
-        # },
-        # {
-        #     "name": "Twitter top stories",
-        #     "filter_lines": "percent",
-        #     "remove": [',', '%'],
-        #     "targets": [],
-        #     "subs": [],
-        #     "keys": [
-        #         ('rank', 0),
-        #         ('asset', 1),
-        #         ('pv', 2),
-        #         ('%', 3)
-        #     ],
-        #     "markers": {
-        #         "start": "Tco top stories ys",
-        #         "end": "Device Type yesterday"
-        #     },
-        # },
-        # {
-        #     "name": "Device types yesterday",
-        #     "filter_lines": "percent",
-        #     "remove": [',', '%'],
-        #     "targets": [],
-        #     "subs": [],
-        #     "keys": [
-        #         ('rank', 0),
-        #         ('name', 1),
-        #         ('pv', 2),
-        #         ('%', 3)
-        #     ],
-        #     "markers": {
-        #         "start": "Device Type yesterday",
-        #         "end": "Device Type L90"
-        #     },
-        # },
-        # {
-        #     "name": "Device types L90",
-        #     "filter_lines": "percent",
-        #     "remove": [',', '%'],
-        #     "targets": [],
-        #     "subs": [],
-        #     "keys": [
-        #         ('name', 1),
-        #         ('pv_l90', 2),
-        #         ('%_l90', 3)
-        #     ],
-        #     "markers": {
-        #         "start": "Device Type L90",
-        #         "end": "Page 8 of 8"
-        #     },
-        # }
+        {
+            "name": "Facebook top stories",
+            "filter_lines": "percent",
+            "trim": [4, -3],
+            "remove": [',', '%'],
+            "targets": [],
+            "subs": [],
+            "keys": [
+                ('rank', 0),
+                ('asset', 1),
+                ('pv', 2),
+                ('%', 3)
+            ],
+            "markers": {
+                "start": "FB top stories lw",
+                "end": "Most Popular Site Sections"
+            },
+        },
+        {
+            "name": "Twitter top stories",
+            "filter_lines": "percent",
+            "trim": [4, -3],
+            "remove": [',', '%'],
+            "targets": [],
+            "subs": [],
+            "keys": [
+                ('rank', 0),
+                ('asset', 1),
+                ('pv', 2),
+                ('%', 3)
+            ],
+            "markers": {
+                "start": "Tco top stories lw",
+                "end": "FB top stories lw"
+            },
+        },
+        {
+            "name": "Device types LW",
+            "filter_lines": "percent",
+            "trim": [3, -4],
+            "remove": [',', '%'],
+            "targets": [],
+            "subs": [],
+            "keys": [
+                ('rank', 0),
+                ('name', 1),
+                ('pv', 2),
+                ('%', 3)
+            ],
+            "markers": {
+                "start": "Device Type last week",
+                "end": " Device Type L90"
+            },
+        },
+        {
+            "name": "Device types L90",
+            "filter_lines": "percent",
+            "trim": [3, -4],
+            "remove": [',', '%'],
+            "targets": [],
+            "subs": [],
+            "keys": [
+                ('name', 1),
+                ('pv_l90', 2),
+                ('%_l90', 3)
+            ],
+            "markers": {
+                "start": "Device Type L90",
+                "end": "Ref Domains LW"
+            },
+        }
     ]
 }
 
@@ -262,6 +268,7 @@ def parse_section(config, ms):
         # see comments in functions 'line' and 'find_between'
         # print("Marker start is: " + item['markers']['start'])
         clean_lines = lines(find_between(ms, item['markers']['start'], item['markers']['end']))
+        print("Clean lines: ", clean_lines)
 
         # trim section from front, end based on 'trim' list of ints
         # ASSUMPTION: content we want will always be contiguous run of lines
@@ -652,7 +659,7 @@ text = process_pdf(config['pdf_name'])  # pdf -> a multi-line string
 
 # PROCESS TEXT FROM PDF
 staging_dict = parse_section(config, text)
-print(staging_dict)
+pp.pprint(staging_dict)
 
 # pp.pprint(parsed_text_dict)
 

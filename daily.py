@@ -140,9 +140,9 @@ def get_online_asset_data(i, info="all"):
             if d_temp_data['author'] == "GuelphMercury.com":
                 d_temp_data['author'] = d_temp_data['site']
         else:
-            # d_temp_data['section'] = "NA"
-            # d_temp_data['body'] = "NA"
-            # d_temp_data['deck'] = "NA"
+            d_temp_data['section'] = "NA"
+            d_temp_data['body'] = "NA"
+            d_temp_data['deck'] = "NA"
             d_temp_data['author'] = "CP Feed"
         # pp.pprint(d_temp_data)
 

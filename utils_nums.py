@@ -25,8 +25,11 @@ def diff(new, old, kind=None):
     # kinds: none (just subtraction), % is (new-old)/old, %90 (new-(old/90)/(old/90))
     # returns a formatted string
     if kind == '%90':
-        result = ((new - (old / 90)) / (old / 90))
-        result = "{:+.1%}".format(result)
+        if old == 0:
+            result = 'NA'
+        else:
+            result = ((new - (old / 90)) / (old / 90))
+            result = "{:+.1%}".format(result)
     else:
         result = new - old
         result = "{:+.1}".format(result)
