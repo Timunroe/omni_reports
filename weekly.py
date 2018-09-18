@@ -45,7 +45,7 @@ config = {
         {
             "name": "summary LW",
             "filter_lines": "number-comma",
-            "trim": [3, -3],
+            "trim": [3, None],
             "remove": [',', '%', 'Spent', 'Weekly'],
             "subs": [
                 ['Average', 'Avg'],
@@ -74,7 +74,7 @@ config = {
             ],
             "keys": [
                 ('metric', 0),
-                ('value', 1),
+                ('value_l90', 1),
             ],
             "markers": {
                 "start": "Summary 3 mos",
@@ -447,13 +447,14 @@ def output_summary(l):
     # diff_visits = diff(item['v'], item['v_l90'])
     # diff_shares = ''
     # diff_clicks = ''
-    spec_stats = [item for item in l if item["name"] == "Spec"]
-    spec_stats = spec_stats[0]
-    spec_pv = spec_stats['pv']
-    spec_pv_l90 = spec_stats['pv_l90']
-    spec_uv = spec_stats['uv']
-    spec_v = spec_stats['v']
-    spec_v_l90 = spec_stats['v_l90']
+    # spec_stats = [item for item in l if item["name"] == "Spec"]
+    stats = [item for item in l]
+    stats = stats[0]
+    pv = stats['pv']
+    pv_l90 = stats['pv_l90']
+    uv = stats['uv']
+    v = stats['v']
+    v_l90 = stats['v_l90']
 
     s = '\n'
     s += '===================================================\n'
@@ -465,11 +466,11 @@ def output_summary(l):
     for item in l:
         if item['name'] == 'Metroland':
             item['name'] = "R of M"
-            pv = "{:,}".format(item['pv'] - spec_pv)
-            diff_pv = diff((item['pv'] - spec_pv), (item['pv_l90'] - spec_pv_l90), '%90')
-            pv_uv = "{:.3}".format((item['pv'] - spec_pv) / (item['uv'] - spec_uv))
-            diff_v = diff(item['v'], (item['v_l90'] - spec_v_l90), '%90')
-            pv_v = "{:.3}".format((item['pv'] - spec_pv) / (item['v'] - spec_v))
+            pv = "{:,}".format(item['pv'] - pv)
+            diff_pv = diff((item['pv'] - pv), (item['pv_l90'] - pv_l90), '%90')
+            pv_uv = "{:.3}".format((item['pv'] - pv) / (item['uv'] - uv))
+            diff_v = diff(item['v'], (item['v_l90'] - v_l90), '%90')
+            pv_v = "{:.3}".format((item['pv'] - pv) / (item['v'] - v))
         else:
             pv = "{:,}".format(item['pv'])
             diff_pv = diff(item['pv'], item['pv_l90'], '%90')
@@ -663,12 +664,13 @@ pp.pprint(staging_dict)
 
 # pp.pprint(parsed_text_dict)
 
-# data['summary'] = merge_lists(staging_dict['summary yesterday'], staging_dict['summary L90'], 'name')
+data['summary'] = merge_lists(staging_dict['summary LW'], staging_dict['summary L90'], 'metric')
+print(data['summary'])
 # data['referrers'] = merge_lists(staging_dict['Referring domains yesterday'], staging_dict['Referring domains L90'], 'domain')
 # data['device type'] = merge_lists(staging_dict['Device types yesterday'], staging_dict['Device types L90'], 'name')[:3]
 # print("data device type")
 # pp.pprint(data['device type'])
-# output += output_summary(data['summary'])
+output += output_summary(data['summary'])
 # output += output_referrers(data['referrers'])
 # output += output_devices(data['device type'])
 # output += output_top_assets(staging_dict['Spec top stories'])
@@ -678,7 +680,7 @@ pp.pprint(staging_dict)
 
 # print(staging_dict['Facebook top stories'])
 # print("OUTPUT:")
-# print(output)
+print(output)
 # pyperclip.copy(output)
 
 # get date needs to be own function:
